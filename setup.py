@@ -59,10 +59,10 @@ _wiringpi = Extension(
 )
 
 setup(
-    name = 'wiringpi',
+    name = 'wiringpi-opi',
     version = '2.60.1',
     ext_modules = [ _wiringpi ],
-    py_modules = ["wiringpi"],
+    py_modules = ["wiringpi-opi"],
     install_requires=[],
     cmdclass = {'build_py' : build_py_ext_first, 'sdist' : sdist_ext_first},
 )

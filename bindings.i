@@ -19,7 +19,7 @@ extern          int  analogRead          (int pin) ;
 extern          void analogWrite         (int pin, int value) ;
 extern          int  piGpioLayout        (void) ;
 extern          int  piBoardRev          (void) ;	// Deprecated
-extern          void piBoardId           (int *model, int *rev, int *mem, int *maker, int *overVolted) ;
+extern          void piBoardId           (int *model); //, int *rev, int *mem, int *maker, int *overVolted) ;
 extern          int  wpiPinToGpio        (int wpiPin) ;
 extern          int  physPinToGpio       (int physPin) ;
 extern          void setPadDrive         (int group, int value) ;
@@ -56,7 +56,8 @@ extern int wiringPiI2CSetup          (const int devId) ;
 // Header file WiringPi/wiringPi/wiringPiSPI.h
 int wiringPiSPIGetFd     (int channel) ;
 int wiringPiSPIDataRW    (int channel, unsigned char *data, int len) ;
-int wiringPiSPISetupMode (int channel, int speed, int mode) ;
+//(int channel, int port, int speed, int mode) ;
+int wiringPiSPISetupMode (int channel, int port, int speed, int mode) ;
 int wiringPiSPISetup     (int channel, int speed) ;
 
 // Header file WiringPi/wiringPi/wiringSerial.h
