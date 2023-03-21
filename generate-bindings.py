@@ -1,6 +1,6 @@
 HEADERS = []
 
-src = open("wiringpi.i").read().split('\n')
+src = open("wiringopi.i").read().split('\n')
 
 for line in src:
     line = line.strip()

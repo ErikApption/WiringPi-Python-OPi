@@ -1,14 +1,14 @@
-import wiringpi
+import wiringopi
 PIN_TO_SENSE = 23
 
 def gpio_callback():
     print "GPIO_CALLBACK!"
 
-wiringpi.wiringPiSetupGpio()
-wiringpi.pinMode(PIN_TO_SENSE, wiringpi.GPIO.INPUT)
-wiringpi.pullUpDnControl(PIN_TO_SENSE, wiringpi.GPIO.PUD_UP)
+wiringopi.wiringPiSetupGpio()
+wiringopi.pinMode(PIN_TO_SENSE, wiringopi.GPIO.INPUT)
+wiringopi.pullUpDnControl(PIN_TO_SENSE, wiringopi.GPIO.PUD_UP)
 
-wiringpi.wiringPiISR(PIN_TO_SENSE, wiringpi.GPIO.INT_EDGE_BOTH, gpio_callback)
+wiringopi.wiringPiISR(PIN_TO_SENSE, wiringopi.GPIO.INT_EDGE_BOTH, gpio_callback)
 
 while True:
-    wiringpi.delay(2000)
+    wiringopi.delay(2000)

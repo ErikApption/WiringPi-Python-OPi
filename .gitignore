@@ -4,4 +4,4 @@ dist/
 __pycache__
 *.pyc
 wiringpi_wrap.c
-wiringpi.py
+wiringopi.py

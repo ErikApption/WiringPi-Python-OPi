@@ -1,5 +1,5 @@
 %pythoncode %{
-# wiringPi modes
+# wiringopi modes
 
 WPI_MODE_PINS = 0;
 WPI_MODE_GPIO = 1;

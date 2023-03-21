@@ -1,4 +1,4 @@
-%module wiringpi
+%module wiringopi
 
 %{
 #if PY_MAJOR_VERSION >= 3
@@ -93,7 +93,7 @@ void _wiringPiISR_callback(int pinNumber) {
 }
 
 
-/* This is embarrasing, WiringPi does not support supplying args to the callback
+/* This is embarrasing, wiringpi does not support supplying args to the callback
 ... so we have to create callback function for each of the pins :( */
 void _wiringPiISR_callback_pin0(void) { _wiringPiISR_callback(0); }
 void _wiringPiISR_callback_pin1(void) { _wiringPiISR_callback(1); }
@@ -242,7 +242,7 @@ static void wiringPiISRWrapper(int pin, int mode, PyObject *PyFunc) {
     case 63: func = &_wiringPiISR_callback_pin63; break;
   }
 
-  // register our dedicated function in WiringPi
+  // register our dedicated function in wiringpi
   wiringPiISR(pin, mode, func);
 }
 
@@ -291,4 +291,4 @@ static void wiringPiISRWrapper(int pin, int mode, PyObject *PyFunc);
 
 %include "bindings.i"
 %include "constants.py"
-%include "wiringpi-class.py"
+%include "wiringopi-class.py"

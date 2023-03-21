@@ -1,5 +1,5 @@
 # Turns on each pin of an mcp23017 on address 0x20 ( quick2wire IO expander )
-import wiringpi
+import wiringopi
 
 PIN_BACKLIGHT = 67 # LED
 PIN_SCLK = 68 # Clock SCLK
@@ -35,40 +35,40 @@ SLOW_DOWN = 400
 pin_base = 65
 i2c_addr = 0x21
 
-wiringpi.wiringPiSetup()
-wiringpi.mcp23017Setup(pin_base,i2c_addr)
+wiringopi.wiringPiSetup()
+wiringopi.mcp23017Setup(pin_base,i2c_addr)
 
 def slow_shift_out(data_pin, clock_pin, data):
   for bit in bin(data).replace('0b','').rjust(8,'0'):
-    wiringpi.digitalWrite(clock_pin,LOW)
-    wiringpi.delay(SLOW_DOWN)
-    wiringpi.digitalWrite(data_pin,int(bit))
-    wiringpi.delay(SLOW_DOWN)
-    wiringpi.digitalWrite(clock_pin,HIGH)
-    wiringpi.delay(SLOW_DOWN)
+    wiringopi.digitalWrite(clock_pin,LOW)
+    wiringopi.delay(SLOW_DOWN)
+    wiringopi.digitalWrite(data_pin,int(bit))
+    wiringopi.delay(SLOW_DOWN)
+    wiringopi.digitalWrite(clock_pin,HIGH)
+    wiringopi.delay(SLOW_DOWN)
 
 def lcd_write(dc, data):
-  wiringpi.digitalWrite(PIN_DC, dc)
-  wiringpi.digitalWrite(PIN_SCE, LOW)
-  wiringpi.delay(SLOW_DOWN)
-  #wiringpi.shiftOut(PIN_SDIN, PIN_SCLK, MSBFIRST, data)
+  wiringopi.digitalWrite(PIN_DC, dc)
+  wiringopi.digitalWrite(PIN_SCE, LOW)
+  wiringopi.delay(SLOW_DOWN)
+  #wiringopi.shiftOut(PIN_SDIN, PIN_SCLK, MSBFIRST, data)
   slow_shift_out(PIN_SDIN, PIN_SCLK, data)
-  wiringpi.digitalWrite(PIN_SCE, HIGH)
-  wiringpi.delay(SLOW_DOWN)
-  #wiringpi.delay(2)
+  wiringopi.digitalWrite(PIN_SCE, HIGH)
+  wiringopi.delay(SLOW_DOWN)
+  #wiringopi.delay(2)
 
 def lcd_initialise():
-  wiringpi.pinMode(PIN_BACKLIGHT,OUTPUT)
-  wiringpi.digitalWrite(PIN_BACKLIGHT, HIGH)
-  wiringpi.pinMode(PIN_SCE, OUTPUT)
-  wiringpi.pinMode(PIN_RESET, OUTPUT)
-  wiringpi.pinMode(PIN_DC, OUTPUT)
-  wiringpi.pinMode(PIN_SDIN, OUTPUT)
-  wiringpi.pinMode(PIN_SCLK, OUTPUT)
-  wiringpi.digitalWrite(PIN_RESET, LOW)
-  wiringpi.delay(SLOW_DOWN)
-  wiringpi.digitalWrite(PIN_RESET, HIGH)
-  wiringpi.delay(SLOW_DOWN)
+  wiringopi.pinMode(PIN_BACKLIGHT,OUTPUT)
+  wiringopi.digitalWrite(PIN_BACKLIGHT, HIGH)
+  wiringopi.pinMode(PIN_SCE, OUTPUT)
+  wiringopi.pinMode(PIN_RESET, OUTPUT)
+  wiringopi.pinMode(PIN_DC, OUTPUT)
+  wiringopi.pinMode(PIN_SDIN, OUTPUT)
+  wiringopi.pinMode(PIN_SCLK, OUTPUT)
+  wiringopi.digitalWrite(PIN_RESET, LOW)
+  wiringopi.delay(SLOW_DOWN)
+  wiringopi.digitalWrite(PIN_RESET, HIGH)
+  wiringopi.delay(SLOW_DOWN)
   lcd_write(LCD_C, 0x21 )  # LCD Extended Commands.
   lcd_write(LCD_C, 0xCC )  # Set LCD Vop (Contrast). 
   lcd_write(LCD_C, 0x04 )  # Set Temp coefficent. //0x04
@@ -90,6 +90,6 @@ lcd_initialise()
 
 for time in range(0,4):
   lcd_clear()
-  wiringpi.delay(1000)
+  wiringopi.delay(1000)
   lcd_fill()
-  wiringpi.delay(1000)
+  wiringopi.delay(1000)

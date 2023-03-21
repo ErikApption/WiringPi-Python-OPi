@@ -9,12 +9,12 @@ from setuptools.command.sdist import sdist
 from distutils.spawn import find_executable
 from glob import glob
 
-sources = glob('WiringPi/devLib/*.c')
-sources += glob('WiringPi/wiringPi/*.c')
+sources = glob('wiringopi/devLib/*.c')
+sources += glob('wiringopi/wiringopi/*.c')
 # If we have swig, use it.  Otherwise, use the pre-generated
 # wrapper from the source distribution.
 if find_executable('swig'):
-    sources += ['wiringpi.i']
+    sources += ['wiringopi.i']
 elif os.path.exists('wiringpi_wrap.c'):
     sources += ['wiringpi_wrap.c']
 else:
@@ -24,14 +24,14 @@ else:
     sys.exit(1)
 
 try:
-    sources.remove('WiringPi/devLib/piFaceOld.c')
+    sources.remove('wiringopi/devLib/piFaceOld.c')
 except ValueError:
     # the file is already excluded in the source distribution
     pass
 
 
 # Fix so that build_ext runs before build_py
-# Without this, wiringpi.py is generated too late and doesn't
+# Without this, wiringopi.py is generated too late and doesn't
 # end up in the distribution when running setup.py bdist or bdist_wheel.
 # Based on:
 #  https://stackoverflow.com/a/29551581/7938656
@@ -50,19 +50,19 @@ class sdist_ext_first(sdist):
         return sdist.run(self)
 
 
-_wiringpi = Extension(
-    '_wiringpi',
-    include_dirs=['WiringPi/wiringPi','WiringPi/devLib'],
+_wiringopi = Extension(
+    '_wiringopi',
+    include_dirs=['wiringopi/wiringopi','wiringopi/devLib'],
     sources=sources,
     swig_opts=['-threads'],
     extra_link_args=['-lcrypt', '-lrt']
 )
 
 setup(
-    name = 'wiringpi-opi',
+    name = 'wiringopi',
     version = '2.60.1',
-    ext_modules = [ _wiringpi ],
-    py_modules = ["wiringpi-opi"],
+    ext_modules = [ _wiringopi ],
+    py_modules = ["wiringopi"],
     install_requires=[],
     cmdclass = {'build_py' : build_py_ext_first, 'sdist' : sdist_ext_first},
 )
