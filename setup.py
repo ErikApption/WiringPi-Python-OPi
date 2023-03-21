@@ -52,7 +52,7 @@ class sdist_ext_first(sdist):
 
 _wiringopi = Extension(
     '_wiringopi',
-    include_dirs=['wiringopi/wiringopi','wiringopi/devLib'],
+    include_dirs=['/usr/include'],
     sources=sources,
     swig_opts=['-threads'],
     extra_link_args=['-lcrypt', '-lrt']

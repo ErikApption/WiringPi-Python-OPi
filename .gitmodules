@@ -1,4 +1,0 @@
-[submodule "wiringopi"]
-	path = wiringopi
-	url = https://github.com/orangepi-xunlong/wiringOP
-	branch = next
